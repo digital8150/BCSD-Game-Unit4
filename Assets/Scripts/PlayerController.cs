@@ -22,6 +22,12 @@ public class PlayerController : MonoBehaviour
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        if (transform.position.y < -10)
+        {
+            GameObject.Find("Spawn Manager").GetComponent<SpawnManager>().GameOver();
+            Destroy(gameObject);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
